@@ -19,20 +19,27 @@ class Program
 
         MembershipFactory factory = GetFactory(membershipType);
 
-        IMembership membership = factory.GetMembership();
+        if (factory != null)
+        {
+            IMembership membership = factory.GetMembership();
 
-        Console.WriteLine("\n Membership you've just created: \n");
+            Console.WriteLine("\n Membership you've just created: \n");
 
-        Console.WriteLine(
-            $"\tName:\t\t{membership.Name}\n" +
-            $"\tPrice:\t{membership.Price}\n" +
-            $"\tMinimum Day Period:\t{membership.MinimumDayPeriod}\n" +
-            $"\tCount Of Devices:\t{membership.CountOfDevices}\n" +
-            $"\tChanells:"
-        );
+            Console.WriteLine(
+                $"\tName:\t\t{membership.Name}\n" +
+                $"\tPrice:\t{membership.Price}\n" +
+                $"\tMinimum Day Period:\t{membership.MinimumDayPeriod}\n" +
+                $"\tCount Of Devices:\t{membership.CountOfDevices}\n" +
+                $"\tChanells:"
+            );
 
-        foreach (var chanel in membership.Channels)
-            Console.WriteLine($"\t\t{chanel}");
+            foreach (var chanel in membership.Channels)
+                Console.WriteLine($"\t\t{chanel}");
+        }
+        else
+        {
+            Console.WriteLine("\nInvalid input =(");
+        }
     }
 
     private static MembershipFactory GetFactory(string membershipType) =>
